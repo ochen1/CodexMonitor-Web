@@ -1,10 +1,10 @@
-# CodexMonitor
+# CodexMonitor Web
 
 ![CodexMonitor](screenshot.png)
 
-CodexMonitor is a Tauri app for orchestrating multiple Codex agents across local workspaces. It provides a sidebar to manage projects, a home screen for quick actions, and a conversation view backed by the Codex app-server protocol.
+CodexMonitor Web is a fork of [Dimillian/CodexMonitor](https://github.com/Dimillian/CodexMonitor) focused on making the product embeddable on the web while preserving compatibility with the upstream daemon and desktop-oriented architecture.
 
-This fork also includes an embeddable web surface built from the same root `src/` tree, backed by the upstream daemon plus a Bun bridge for browser-safe RPC and event streaming.
+Upstream CodexMonitor is a Tauri app for orchestrating multiple Codex agents across local workspaces. This fork adds an embeddable web surface built from the same root `src/` tree, backed by the upstream daemon plus a Bun bridge for browser-safe RPC and event streaming.
 
 ## Features
 
