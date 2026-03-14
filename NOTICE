@@ -1,0 +1,11 @@
+This project is a web-adapted fork of CodexMonitor.
+
+Upstream project:
+- Name: CodexMonitor
+- Repository: https://github.com/Dimillian/CodexMonitor
+- Upstream license: MIT
+- Original copyright: Thomas Ricouard
+
+This repository reuses and adapts upstream work, including the CodexMonitor
+frontend structure and the upstream daemon integration model. The Bun bridge,
+browser shims, and embedded web runtime changes are maintained in this fork.

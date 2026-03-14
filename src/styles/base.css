@@ -60,6 +60,21 @@ body {
   font-family: var(--ui-font-family);
 }
 
+html[data-embed="true"] body {
+  overscroll-behavior: contain;
+}
+
+.app.embed-mode {
+  width: 100%;
+}
+
+.app.embed-mode .drag-strip,
+.app.embed-mode .titlebar-controls,
+.app.embed-mode .window-caption-controls,
+.app.embed-mode .titlebar-toggle {
+  display: none;
+}
+
 .app.is-resizing,
 .app.is-resizing .main {
   transition: none;

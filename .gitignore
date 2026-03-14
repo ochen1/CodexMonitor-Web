@@ -9,8 +9,13 @@ lerna-debug.log*
 
 node_modules
 dist
+embed-dist
 dist-ssr
 *.local
+.env
+package-lock.json
+data/
+vendor/
 src-tauri/tauri.ios.local.conf.json
 .testflight.local.env
 

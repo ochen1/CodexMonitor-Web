@@ -123,7 +123,7 @@ If upstream introduces a hard max or materially changes spawn behavior, revisit 
 ## Validation Before Merge
 
 ```bash
-npm run typecheck
-npm run test -- src/services/tauri.test.ts src/features/settings/components/sections/SettingsAgentsSection.test.tsx src/features/settings/components/SettingsView.test.tsx
+bun run typecheck
+bun run test -- src/services/tauri.test.ts src/features/settings/components/sections/SettingsAgentsSection.test.tsx src/features/settings/components/SettingsView.test.tsx
 cd src-tauri && cargo check
 ```

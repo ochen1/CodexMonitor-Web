@@ -2,6 +2,7 @@ import { lazy, Suspense, type CSSProperties, type ComponentProps, type RefObject
 import { AppLayout } from "@app/components/AppLayout";
 import { AppModals } from "@app/components/AppModals";
 import type { AppModalsProps } from "@app/components/AppModals";
+import { isEmbedMode } from "@/embed";
 import {
   TitlebarExpandControls,
 } from "@/features/layout/components/SidebarToggleControls";
@@ -51,11 +52,13 @@ export function MainAppShell({
   showMobileSetupWizard,
   mobileSetupWizardProps,
 }: MainAppShellProps) {
+  const embedMode = isEmbedMode();
+
   return (
     <div className={`${appClassName}${isResizing ? " is-resizing" : ""}`} style={appStyle} ref={appRef}>
-      <div className="drag-strip" id="titlebar" />
-      <TitlebarExpandControls {...sidebarToggleProps} />
-      <WindowCaptionControls />
+      {embedMode ? null : <div className="drag-strip" id="titlebar" />}
+      {embedMode ? null : <TitlebarExpandControls {...sidebarToggleProps} />}
+      {embedMode ? null : <WindowCaptionControls />}
       {shouldLoadGitHubPanelData ? (
         <Suspense fallback={null}>
           <GitHubPanelData {...gitHubPanelDataProps} />

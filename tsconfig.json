@@ -30,5 +30,6 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": ["src"],
+  "exclude": ["src/codexmonitor-web-backend.ts", "src/codexmonitor.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

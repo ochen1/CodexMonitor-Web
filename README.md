@@ -4,6 +4,8 @@
 
 CodexMonitor is a Tauri app for orchestrating multiple Codex agents across local workspaces. It provides a sidebar to manage projects, a home screen for quick actions, and a conversation view backed by the Codex app-server protocol.
 
+This fork also includes an embeddable web surface built from the same root `src/` tree, backed by the upstream daemon plus a Bun bridge for browser-safe RPC and event streaming.
+
 ## Features
 
 ### Workspaces & Threads
@@ -44,6 +46,31 @@ CodexMonitor is a Tauri app for orchestrating multiple Codex agents across local
 - Terminal dock with multiple tabs for background commands (experimental).
 - In-app updates with toast-driven download/install, debug panel copy/clear, sound notifications, plus platform-specific window effects (macOS overlay title bar + vibrancy) and a reduced transparency toggle.
 
+## Embeddable Web Fork
+
+This fork keeps upstream desktop support, but adds a browser-first surface intended for iframe embedding and sandboxed runtime deployment.
+
+- Shared app source: `src/`
+- Embed build config: `vite.embed.config.ts`
+- Bun bridge: `src/codexmonitor-web-backend.ts`
+- Daemon manager: `src/codexmonitor.ts`
+
+Useful commands:
+
+```bash
+bun run codexmonitor:prepare
+bun run codexmonitor:build
+bun run codexmonitor:daemon:start
+bun run embed:backend
+bun run embed:dev
+bun run embed:build
+```
+
+More detail:
+
+- [Embeddable web guide](./docs/embeddable-web.md)
+- [Vercel Sandbox deployment shape](./docs/vercel-sandbox.md)
+
 ## Requirements
 
 - Node.js + npm
@@ -57,7 +84,7 @@ CodexMonitor is a Tauri app for orchestrating multiple Codex agents across local
 If you hit native build errors, run:
 
 ```bash
-npm run doctor
+bun run doctor
 ```
 
 ## Getting Started
@@ -65,13 +92,13 @@ npm run doctor
 Install dependencies:
 
 ```bash
-npm install
+bun install
 ```
 
 Run in dev mode:
 
 ```bash
-npm run tauri:dev
+bun run tauri:dev
 ```
 
 ## iOS Support (WIP)
@@ -214,7 +241,7 @@ For new setups, copy `.testflight.local.env.example` to `.testflight.local.env` 
 Build the production Tauri bundle:
 
 ```bash
-npm run tauri:build
+bun run tauri:build
 ```
 
 Artifacts will be in `src-tauri/target/release/bundle/` (platform-specific subfolders).
@@ -224,7 +251,7 @@ Artifacts will be in `src-tauri/target/release/bundle/` (platform-specific subfo
 Windows builds are opt-in and use a separate Tauri config file to avoid macOS-only window effects.
 
 ```bash
-npm run tauri:build:win
+bun run tauri:build:win
 ```
 
 Artifacts will be in:
@@ -239,19 +266,19 @@ Note: building from source on Windows requires LLVM/Clang (for `bindgen` / `libc
 Run the TypeScript checker (no emit):
 
 ```bash
-npm run typecheck
+bun run typecheck
 ```
 
-Note: `npm run build` also runs `tsc` before bundling the frontend.
+Note: `bun run build` also runs `tsc` before bundling the frontend.
 
 ## Validation
 
 Recommended validation commands:
 
 ```bash
-npm run lint
-npm run test
-npm run typecheck
+bun run lint
+bun run test
+bun run typecheck
 cd src-tauri && cargo check
 ```
 

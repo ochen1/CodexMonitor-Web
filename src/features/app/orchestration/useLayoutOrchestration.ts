@@ -1,5 +1,6 @@
 import { useMemo, type CSSProperties } from "react";
 import type { AppSettings } from "@/types";
+import { isEmbedMode } from "@/embed";
 import { isWindowsPlatform } from "@utils/platformPaths";
 
 type UseAppShellOrchestrationOptions = {
@@ -44,6 +45,7 @@ export function useAppShellOrchestration({
   appSettings,
 }: UseAppShellOrchestrationOptions) {
   const isWindows = isWindowsPlatform();
+  const embedMode = isEmbedMode();
   const showGitDetail = Boolean(selectedDiffPath) && isPhone && centerMode === "diff";
   const isThreadOpen = Boolean(activeThreadId && showComposer);
 
@@ -53,7 +55,7 @@ export function useAppShellOrchestration({
     shouldReduceTransparency ? " reduced-transparency" : ""
   }${!isCompact && sidebarCollapsed ? " sidebar-collapsed" : ""}${
     !isCompact && rightPanelCollapsed ? " right-panel-collapsed" : ""
-  }${isWindows ? " is-windows" : ""}`;
+  }${isWindows ? " is-windows" : ""}${embedMode ? " embed-mode" : ""}`;
 
   const appStyle = useMemo<CSSProperties>(
     () => ({
@@ -68,11 +70,11 @@ export function useAppShellOrchestration({
       "--ui-font-family": appSettings.uiFontFamily,
       "--code-font-family": appSettings.codeFontFamily,
       "--code-font-size": `${appSettings.codeFontSize}px`,
-      "--sidebar-top-padding": isWindows ? "10px" : "36px",
+      "--sidebar-top-padding": embedMode ? "12px" : isWindows ? "10px" : "36px",
       "--right-panel-top-padding": isWindows
         ? "calc(var(--main-topbar-height, 44px) + 6px)"
         : "12px",
-      "--home-scroll-offset": isWindows ? "var(--main-topbar-height, 44px)" : "0px",
+      "--home-scroll-offset": embedMode ? "0px" : isWindows ? "var(--main-topbar-height, 44px)" : "0px",
       "--window-caption-width": isWindows ? "138px" : "0px",
       "--window-caption-gap": isWindows ? "10px" : "0px",
       ...(isWindows
@@ -97,6 +99,7 @@ export function useAppShellOrchestration({
       appSettings.uiFontFamily,
       chatDiffSplitPositionPercent,
       debugPanelHeight,
+      embedMode,
       isWindows,
       isCompact,
       planPanelHeight,
