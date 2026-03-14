@@ -73,7 +73,7 @@ More detail:
 
 ## Requirements
 
-- Node.js + npm
+- Bun
 - Rust toolchain (stable)
 - CMake (required for native dependencies; dictation/Whisper uses it)
 - LLVM/Clang (required on Windows to build dictation dependencies via bindgen)
